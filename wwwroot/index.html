@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -13,9 +13,9 @@
         <input type="submit" value="Add">
     </form>
 
-    <div id="editForm">
+    <div id="spoiler">
         <h3>Edit</h3>
-        <form action="javascript:void(0);" onsubmit="updateItem()">
+        <form class="my-form">
             <input type="hidden" id="edit-id">
             <input type="checkbox" id="edit-isComplete">
             <input type="text" id="edit-name">
@@ -28,7 +28,7 @@
 
     <table>
         <tr>
-            <th>Is Complete?</th>
+            <th>Is Complete</th>
             <th>Name</th>
             <th></th>
             <th></th>
@@ -36,9 +36,8 @@
         <tbody id="todos"></tbody>
     </table>
 
-    <script src="js/site.js" asp-append-version="true"></script>
-    <script type="text/javascript">
-        getItems();
-    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="js/site.js"></script>
 </body>
-</html>

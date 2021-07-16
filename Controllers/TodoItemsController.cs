@@ -19,14 +19,14 @@ namespace TodoWebApi.Controllers {
 
         // GET: api/TodoItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems () {
+        public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems () {
             return await _context.TodoItems.Select (x => ItemToDTO (x)).ToListAsync ();
             //return await _context.TodoItems.ToListAsync ();
         }
 
         // GET: api/TodoItems/5
         [HttpGet ("{id}")]
-        public async Task<ActionResult<TodoItem>> GetTodoItem (long id) {
+        public async Task<ActionResult<TodoItemDTO>> GetTodoItem (long id) {
             var todoItem = await _context.TodoItems.FindAsync (id);
 
             if (todoItem == null) {
@@ -40,7 +40,7 @@ namespace TodoWebApi.Controllers {
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut ("{id}")]
         public async Task<IActionResult> UpdateTodoItem (long id, TodoItemDTO todoItemDTO) {
-            if (id != todoItemDTO.id) {
+            if (id != todoItemDTO.Id) {
                 return BadRequest ();
             }
 
@@ -73,7 +73,7 @@ namespace TodoWebApi.Controllers {
             _context.TodoItems.Add (todoItem);
             await _context.SaveChangesAsync ();
 
-            return CreatedAtAction (nameof (GetTodoItem), new { id = todoItem.id }, ItemToDTO (todoItem));
+            return CreatedAtAction (nameof (GetTodoItem), new { id = todoItem.Id }, ItemToDTO (todoItem));
         }
 
         // DELETE: api/TodoItems/5
@@ -88,8 +88,8 @@ namespace TodoWebApi.Controllers {
             return NoContent ();
         }
 
-        private bool TodoItemExists (long id) {
-            return _context.TodoItems.Any (e => e.id == id);
+        private bool TodoItemExists (long Id) {
+            return _context.TodoItems.Any (e => e.Id == Id);
         }
 
         private static TodoItemDTO ItemToDTO (TodoItem todoItem) => new TodoItemDTO {
